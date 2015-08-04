@@ -1,0 +1,97 @@
+<div class="mdl-grid mdl-cell--12-col">
+
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+			  <h1>Grupos <small>aqui pode ir alguma coisa</small></h1>
+			</div>
+		</div>
+	</div>
+
+<div class="row">
+	<div class="col-md-6">
+
+	    <div class="input-group full-width">
+	        <div class="input-group-addon">
+	        	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	        </div>
+	      <input type="text" class="form-control" placeholder="Qualquer..." ng-model="vm.tableState.search" ng-change="vm.search()" ng-model-options="{debounce: 750}">
+	    </div><!-- /input-group -->
+
+  	</div><!-- /.col-md-6 -->
+
+	  	<div class="col-md-6">
+	<!-- <button type="submit" class="btn btn-primary">Transfer cash</button> -->
+			<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored pull-right mdl-color--green"
+			ng-dialog-class="ngdialog-theme-plain"
+		  ng-dialog="/static/templates/grupo/grupo_novo.html"
+		  ng-dialog-controller="NovoGrupoController as vm">
+			  <i class="material-icons">add</i>
+			</button>
+		</div>
+</div>
+
+<div class="row margin-top-10">
+	<div class="col-md-12">
+
+		<table class="table table-hover">
+		  <thead>
+		    </tr>
+		      <th width="5%">
+
+		      	<a href="javascript:void(0)" ng-click="vm.ordenar('id')"> Id 
+		      		<span class="glyphicon" ng-show="vm.orderByAtual == 'id'"
+		      			ng-class="{asc:'glyphicon-menu-up', desc:'glyphicon-menu-down'}[vm.classByAtual]" aria-hidden="true"></span>
+		      	</a>
+		      </th>
+
+		      <th width="95%">
+		      	<a href="javascript:void(0)" ng-click="vm.ordenar('descricao')"> Descrição 
+		      		<span class="glyphicon" ng-show="vm.orderByAtual == 'descricao'"
+		      			ng-class="{asc:'glyphicon-menu-up', desc:'glyphicon-menu-down'}[vm.classByAtual]" aria-hidden="true"></span>
+		      	</a>
+		      </th>
+		  </thead>
+		  <tbody>
+		    <tr ng-repeat="row in vm.response.results">
+		      	<td>{{row.id}}</td>
+		      	<td>{{row.descricao}}</td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<nav>
+			  <ul class="pagination" style="margin-top:0px;">
+
+			    <li ng-class="{disabled: !vm.response.has_previous}">
+			      <a href="javascript:void(0)" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    
+			    <li ng-repeat="row in vm.response.page_range" 
+			    		ng-class="{active: row == vm.tableState.page}">
+			    	
+			    	<a href="javascript:void(0)">{{row}}</a>
+				</li>
+			    
+			    <li ng-class="{disabled: !vm.response.has_next}">
+			      <a href="javascript:void(0)" aria-label="Next" ng-click="disabled || vm.nextPage();">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+
+			  </ul>
+			</nav>
+		</div>
+	</div>
+
+
+</div>
+</div>
+</div>
